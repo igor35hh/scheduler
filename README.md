@@ -28,8 +28,8 @@ For instance, you can use the following in your application that checks urls:
       Log:              scheduler.NewLogger(2),
     })
 
-		j := Job{name: "check wiki", url: "https://www.wikipedia.org/"}
-		sched.Schedule(j.Run)
+    j := Job{name: "check wiki", url: "https://www.wikipedia.org/"}
+    sched.Schedule(j.Run)
 
     for sched.PendingCount() != 0 || sched.RunningCount() != 0 {
       time.Sleep(1 * time.Second)
@@ -37,8 +37,8 @@ For instance, you can use the following in your application that checks urls:
 
     task := sched.GetReady()
     if t, ok := task.(*Job); ok {
-			fmt.Println(t.name, t.status, t.url, t.err)
-		}
+      fmt.Println(t.name, t.status, t.url, t.err)
+    }
 
 ## Examples
 
