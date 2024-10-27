@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"sync"
 	"time"
 
 	"github.com/igor35hh/scheduler"
@@ -32,10 +33,26 @@ func main() {
 		Log:              scheduler.NewLogger(scheduler.LogLevelInfol),
 	})
 
-	for i := 0; i < 100; i++ {
-		j := Job{name: "check wiki", url: "https://www.wikipedia.org/"}
-		sched.Schedule(j.Run)
-	}
+	var wg sync.WaitGroup
+	wg.Add(2)
+
+	go func() {
+		for i := 0; i < 50; i++ {
+			j := Job{name: "check wiki", url: "https://www.wikipedia.org/"}
+			sched.Schedule(j.Run)
+		}
+		wg.Done()
+	}()
+
+	go func() {
+		for i := 0; i < 50; i++ {
+			j := Job{name: "check wiki", url: "https://www.wikipedia.org/"}
+			sched.Schedule(j.Run)
+		}
+		wg.Done()
+	}()
+
+	wg.Wait()
 
 	for sched.PendingCount() != 0 || sched.RunningCount() != 0 {
 		time.Sleep(1 * time.Second)

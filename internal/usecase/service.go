@@ -64,7 +64,7 @@ func (s *TaskScheduler) GetReady() interface{} {
 func (s *TaskScheduler) Schedule(fn func() (interface{}, error)) string {
 	task := entity.NewTask(s.log, fn)
 	s.pendingQueue.Add(task)
-	s.log.Info("the task %s was added to pending queue", task.GetId())
+	s.log.Info("the task", task.GetId(), "was added to pending queue")
 	return task.GetId()
 }
 
@@ -90,7 +90,7 @@ func (s *TaskScheduler) RunningCount() int {
 func (s *TaskScheduler) get() entity.Task {
 	task := s.pendingQueue.Pop()
 	if task != nil {
-		s.log.Info("the task %s was taken into the proccess", task.GetId())
+		s.log.Info("the task", task.GetId(), "was taken into the proccess")
 	}
 
 	return task

@@ -49,10 +49,10 @@ func (t *TaskWrapper) Complete() {
 		j, err := t.fn()
 		if err == nil {
 			t.object = j
-			t.log.Info("task %s executed succesfully", t.id)
+			t.log.Info("task", t.id, "executed succesfully")
 			break
 		}
-		t.log.Warn("task %s attempt %d, executed with error %v", t.id, i, err)
+		t.log.Warn("task", t.id, "attempt", i, "executed with error", err)
 		time.Sleep(time.Duration(1+i) * time.Minute)
 	}
 }
