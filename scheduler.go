@@ -3,7 +3,7 @@ package scheduler
 import (
 	"context"
 
-	src "github.com/igor35hh/scheduler/internal"
+	src "github.com/igor35hh/scheduler/internal/usecase"
 	pkg "github.com/igor35hh/scheduler/pkg"
 )
 
