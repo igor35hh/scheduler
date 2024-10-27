@@ -3,7 +3,8 @@ package scheduler
 import (
 	"context"
 
-	"github.com/igor35hh/scheduler/src"
+	src "github.com/igor35hh/scheduler/internal"
+	pkg "github.com/igor35hh/scheduler/pkg"
 )
 
 type Scheduler interface {
@@ -19,7 +20,7 @@ type Parameters struct {
 	Ctx              context.Context // The context is using to stop jobs
 	TasksBuffer      int64           // The count of concurrently running tasks
 	CountTasksToPick uint            // The count of task to pick up from the pending queue
-	Log              src.Logger      // The logger instance to log steps of tasks execution
+	Log              pkg.Logger      // The logger instance to log steps of tasks execution
 }
 
 func NewScheduler(p *Parameters) Scheduler {
@@ -27,12 +28,12 @@ func NewScheduler(p *Parameters) Scheduler {
 }
 
 var (
-	LogLevelError = src.LogLevelError
-	LogLevelWarn  = src.LogLevelWarn
-	LogLevelInfol = src.LogLevelInfo
-	LogLevelDebug = src.LogLevelDebug
+	LogLevelError = pkg.LogLevelError
+	LogLevelWarn  = pkg.LogLevelWarn
+	LogLevelInfol = pkg.LogLevelInfo
+	LogLevelDebug = pkg.LogLevelDebug
 )
 
-func NewLogger(level src.LogLevel) src.Logger {
-	return src.NewLogger(level)
+func NewLogger(level pkg.LogLevel) pkg.Logger {
+	return pkg.NewLogger(level)
 }
